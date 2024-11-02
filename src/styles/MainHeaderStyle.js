@@ -27,6 +27,7 @@ export const StyledSelect = styled.select`
     color: #333; 
     font-size: 16px; 
     margin-left: auto;
+    box-shadow: 0px 5px 1px rgba(0, 0, 0, 0.2);
 
     &:hover {
         border-color: #888; 

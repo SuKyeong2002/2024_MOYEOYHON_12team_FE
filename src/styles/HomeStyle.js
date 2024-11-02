@@ -7,8 +7,15 @@ export const Home = styled.div`
 
     height: 100vh;
     padding: 10%;
+`
 
-    /* background-color : #686868; */
+export const Home2 = styled.div`
+    display : flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    padding: 10%;
 `
 
 export const Tab = styled.div`

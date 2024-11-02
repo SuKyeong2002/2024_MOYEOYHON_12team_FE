@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const LoginContainer = styled.div`
-    width: 610px;
-    height: 490px;
+    width: 1120px;
+    height: 550px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,6 +12,18 @@ export const LoginContainer = styled.div`
     border: 1px solid #92856A;
     border-radius: 10px;
     box-shadow: 0px 5px 1px rgba(0, 0, 0, 0.2);
+`;
+
+export const CongratulationsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+        img {
+        width: 900px;  
+        height: 480px;  
+        }
 `;
 
 export const Form = styled.form`
@@ -25,7 +37,7 @@ export const Form = styled.form`
 
 export const Title = styled.label`
     font-family: "Baloo 2", sans-serif;
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: bold;
     color: #333333;
     margin-bottom: 100px;
@@ -60,13 +72,7 @@ export const FireIconWrapper = styled.div`
     display: inline;  
     align-items: center;  
     justify-content: center;  
-
-    img {
-        width: 300px;  
-        height: 300px;  
-        margin-right: 50px;
-        margin-bottom: 100px;
-        }
+    margin-bottom: 20px;
 `;
 
 export const Input = styled.input`
@@ -87,18 +93,17 @@ export const Input = styled.input`
 export const Button = styled.button`
     width: 220px;
     height: 50px;
+    padding: 10px 20px;
+    gap: 50px
+    background-color: #000000;
     border: none;
     border-radius: 10px;
     font-size: 1rem;
     cursor: pointer;
     box-shadow: 0px 5px 1px rgba(0, 0, 0, 0.2);
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background-color: #ffffff;
 
     &:hover {
-        background-color: #C3B18D;
+        background-color: #f0f0f0;
     }
 `;
 

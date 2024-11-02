@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as L from '@/styles/LoginStyle';
+import { useNavigate } from 'react-router-dom';
 import FireIcon from '../../assets/icons/Fire.svg';
 
 const Login = () => {
     const [nickname, setNickname] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         setNickname(e.target.value);
@@ -22,6 +24,7 @@ const Login = () => {
             // 성공적인 응답 처리
             if (response.status === 201 && response.data.code === 201) {
                 setMessage(response.data.message);
+                navigate('/correct');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -30,6 +33,8 @@ const Login = () => {
                 setMessage(error.response.data.message || '닉네임 설정에 실패했습니다. 다시 시도해 주세요.');
             } else {
                 setMessage('서버와의 연결에 실패했습니다. 나중에 다시 시도해 주세요.');
+                navigate('/correct', { replace: true });
+
             }
         }
     };

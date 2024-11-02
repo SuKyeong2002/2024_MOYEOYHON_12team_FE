@@ -5,7 +5,6 @@ export const Home = styled.div`
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 10%;
     border: 5px solid #A99978;
 `
 

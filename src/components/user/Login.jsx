@@ -19,9 +19,12 @@ const profile = [
     { name: 'P5', src: P5 },
 ];
 
+const roles = ['ADMIN', 'GUEST']; // 역할 목록
+
 const Login = ({ language }) => {
     const [nickname, setNickname] = useState('');
     const [currentP, setCurrentP] = useState(0);
+    const [selectedRole, setSelectedRole] = useState(roles[0]); // 기본 역할
     const [message, setMessage] = useState('');
     const [isJoining, setIsJoining] = useState(false);
     const navigate = useNavigate();
@@ -32,7 +35,9 @@ const Login = ({ language }) => {
     };
 
     const handlePrev = () => {
-        setCurrentP((prevP) => (prevP === 0 ? profile.length - 1 : prevP - 1));
+        setCurrentP((prevP) =>
+            prevP === 0 ? profile.length - 1 : prevP - 1
+        );
     };
 
     useEffect(() => {
@@ -42,56 +47,58 @@ const Login = ({ language }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
+        const userData = {
+            profile: "sssss",
+            username: nickname,
+            role: selectedRole // 선택한 역할
+        };
+    
         try {
-            let roomId;
-
-            // 방에 참가하는 경우
-            if (isJoining) {
-                const searchParams = new URLSearchParams(location.search);
-                roomId = searchParams.get('roomId');
-                navigate(`/waiting?roomId=${roomId}&nickname=${nickname}`);
-            } else {
-                // 방을 생성하는 경우
-                const response = await axios.post('http://localhost:8080/createRoom', { nickname });
-                if (response.status === 201) {
-                    roomId = response.data.roomId;
-                    navigate(`/waiting?roomId=${roomId}&nickname=${nickname}&isHost=true`);
+            // 사용자 프로필 저장 요청
+            const response = await axios.post('http://52.71.176.111:8080/user/save', userData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (response.status === 200) {
+                // 방에 참여하는 경우
+                if (isJoining) {
+                    const searchParams = new URLSearchParams(location.search);
+                    navigate(`/waiting?roomId=${searchParams.get('roomId')}&nickname=${nickname}`);
+                } else {
+                    // 방 생성 요청
+                    const createRoomResponse = await axios.post(`http://52.71.176.111:8080/api/room/create?roomId=${response.data.roomId}`, {}, {
+                        headers: {
+                            'accept': '*/*'
+                        }
+                    });
+    
+                    if (createRoomResponse.status === 200) {
+                        const roomId = createRoomResponse.data.roomId; // 방 ID 가져오기
+                        navigate(`/waiting?roomId=${roomId}&nickname=${nickname}&isHost=true`); // 방 대기 화면으로 이동
+                    }
                 }
             }
-
-            // 프로필 저장 API 호출
-            const profileResponse = await axios.post('http://localhost:8080/user/save', {
-                userDto: {
-                    profile: profile[currentP].name, // 선택된 프로필 이름
-                    username: nickname,
-                    role: 'ADMIN',
-                },
-            });
-
-            if (profileResponse.status === 200) {
-                console.log('프로필이 성공적으로 저장되었습니다.');
-            }
         } catch (error) {
-            if (error.response) {
-                const { status, message } = error.response.data;
-                setMessage(language === 'ko' ? message : 'Failed to save user profile.');
-            } else {
-                setMessage(language === 'ko' ? '방 만들기에 실패했습니다. 다시 시도해 주세요.' : 'Failed to create a room. Please try again.');
-            }
+            console.error('Error saving profile:', error); // 에러 로그 출력
+            setMessage(language === 'ko' ? '프로필 저장에 실패했습니다. 다시 시도해 주세요.' : 'Failed to save profile. Please try again.');
         }
     };
+    
 
     return (
         <L.LoginContainer>
             <L.Form onSubmit={handleSubmit}>
                 <L.Title>{language === 'ko' ? '프로필을 만들어주세요' : 'Create Your Profile'}</L.Title>
+                
                 <L.Footer>
-                    <button type="button" onClick={handlePrev}>
+                    <button onClick={handlePrev}>
                         <img className='Btnimg' src={PrevBtn} alt="Previous" />
                     </button>
                     <L.Profile src={profile[currentP].src} alt={profile[currentP].name} />
-                    <button type="button" onClick={handleNext}>
+                    <button onClick={handleNext}>
                         <img className='Btnimg' src={NextBtn} alt="Next" />
                     </button>
                 </L.Footer>
@@ -102,6 +109,22 @@ const Login = ({ language }) => {
                     onChange={(e) => setNickname(e.target.value)}
                     placeholder={language === 'ko' ? '닉네임을 입력해주세요.' : 'Enter your nickname.'}
                 />
+
+                {/* 역할 선택 라디오 버튼 추가 */}
+                <div>
+                    {roles.map(role => (
+                        <label key={role}>
+                            <input
+                                type="radio"
+                                value={role}
+                                checked={selectedRole === role}
+                                onChange={(e) => setSelectedRole(e.target.value)}
+                            />
+                            {role}
+                        </label>
+                    ))}
+                </div>
+
                 <L.Button type="submit">
                     <img src={StartIcon} alt="다시 아이콘" />
                     {isJoining ? (language === 'ko' ? '참가하기' : 'Join Room') : (language === 'ko' ? '방 만들기' : 'Create Room')}

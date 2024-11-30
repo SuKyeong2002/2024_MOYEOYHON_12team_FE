@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 export const LoginContainer = styled.div`
-    width: 610px;
-    height: 490px;
+    width: 665px;
+    height: 523px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #F7E8BD;
-    padding: 20px;
+    padding: 30px 20px;
     border: 1px solid #92856A;
     border-radius: 10px;
     box-shadow: 0px 5px 1px rgba(0, 0, 0, 0.2);
+    gap: 15px;
 `;
 
 export const Form = styled.form`
@@ -19,8 +20,7 @@ export const Form = styled.form`
     flex-direction: column;
     align-items: center;
     background-color: #F7E8BD;
-    padding: 30px;
-    gap: 10px;
+    gap: 20px;
 `;
 
 export const Title = styled.label`
@@ -28,7 +28,7 @@ export const Title = styled.label`
     font-size: 1.5rem;
     font-weight: bold;
     color: #333333;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
 `;
 
 export const LabelContainer = styled.div`
@@ -70,10 +70,10 @@ export const FireIconWrapper = styled.div`
 `;
 
 export const Input = styled.input`
-    width: 280px;
+    width: 360px;
     height: 50px;
-    padding: 10px;
-    border: 2px solid #A99978;
+    padding: 10px 20px;
+    border: none;
     border-radius: 10px;
     font-size: 1rem;
     background-color: #ECECEC;
@@ -100,6 +100,12 @@ export const Button = styled.button`
     &:hover {
         background-color: #C3B18D;
     }
+
+    img {
+        width: 30px;  
+        height: 30px;  
+        margin-right: 10px;
+        }
 `;
 
 export const Message = styled.div`
@@ -108,3 +114,28 @@ export const Message = styled.div`
     font-weight: bold;
     text-align: center;
 `;
+
+export const Profile = styled.img`
+    width: 200px;
+    height: 200px;
+`
+
+export const ProfileContainer = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+export const Footer = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    button{
+        background-color: transparent;
+        border: none;
+    }
+    .Btnimg{
+        width: 30px;
+    }
+`

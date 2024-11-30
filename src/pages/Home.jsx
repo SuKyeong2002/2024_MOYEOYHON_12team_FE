@@ -1,20 +1,22 @@
-import React from 'react';
-import * as H from '@/styles/HomeStyle';
-import ChatApp from '@/components/ChatApp'
-import Header from '@/components/Header'
+import { useState } from 'react';
+import MainHeader from '@/components/user/MainHeader'
+import Login from '@/components/user/Login';
 import RuleCard from '@/components/RuleCard';
+import * as H from '@/styles/HomeStyle';
+import Bookmark from '@/components/Bookmark';
 
-const Home = ({ }) => {
-
+const Main = ({ }) => {
+  const [language, setLanguage] = useState('ko'); // 기본값: 한국어
 
   return (
     <>
       <H.Home>
+        <Bookmark />
         <H.Tab>
-          <Header />
+          <MainHeader language={language} setLanguage={setLanguage}/>
           <H.RowBox>
-            <RuleCard />
-            <ChatApp />
+            <Login language={language} />
+            <RuleCard language={language}/>
           </H.RowBox>
         </H.Tab>
       </H.Home>
@@ -22,4 +24,4 @@ const Home = ({ }) => {
   )
 }
 
-export default Home;
+export default Main;

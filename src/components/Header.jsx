@@ -8,7 +8,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     const handleHomeClick = () => {
-        navigate('/main');
+        navigate('/');
     };
 
     return (

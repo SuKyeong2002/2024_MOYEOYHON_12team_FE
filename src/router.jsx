@@ -1,18 +1,19 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from '@/pages/Home';
-import Main from '@/pages/Main';
-import Correct from '@/pages/Correct';
+import Game from '@/pages/Game';
 import Recommendation from './pages/Recommendation';
+import Confirm from './pages/Confirm';
 
 
 const AppRouter = ({ }) => {
+    
     return (
         <Routes>
             <Route path='/' element={<Home/>} />
-            <Route path='/main' element={<Main/>} />
-            <Route path='/correct' element={<Correct/>} />
+            <Route path='/game' element={<Game/>} />
             <Route path='/recommendation' element={<Recommendation/>} />
+            <Route path='/confirm' element={<Confirm />} />
         </Routes>
     )
 };

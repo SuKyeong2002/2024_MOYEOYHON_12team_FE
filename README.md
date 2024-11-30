@@ -8,4 +8,9 @@
 npm install react-router-dom <br/>
 npm install styled-components <br/>
 npm install socket.io-client <br/>
-
+npm install react-confetti  <br/>
+npm install react-use  <br/>
+npm install axios <br/>
+npm install @stomp/stompjs <br/>
+npm install sockjs-client <br/>
+npm install global <br/>

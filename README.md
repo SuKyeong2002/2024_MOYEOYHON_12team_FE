@@ -1,4 +1,4 @@
-# MOYEO
+# 🎮 MOYEO 🎮
 
 ![image](https://github.com/user-attachments/assets/11e5b6f2-d842-4365-a488-5feab99768dd)
 
